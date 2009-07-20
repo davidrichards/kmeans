@@ -4,11 +4,12 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
     s.name = "kmeans"
-    s.summary = %Q{TODO}
+    s.summary = %Q{KMeans for clustering}
     s.email = "davidlamontrichards@gmail.com"
     s.homepage = "http://github.com/davidrichards/kmeans"
-    s.description = "TODO"
+    s.description = "A simple KMeans algorithm"
     s.authors = ["David Richards"]
+    s.add_dependency('davidrichards-tegu_gears')
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
