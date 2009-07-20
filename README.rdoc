@@ -1,0 +1,33 @@
+== KMeans
+
+This is another KMeans implementation.  I have a few things that I need to work on:
+
+* Extract the NodeList information out of the Node to make it more flexible
+* Work on an online version of this code
+
+The basic idea is that I wanted to solve a problem for a client, but I didn't want to throw the code away.  So you get this.
+
+==Usage
+
+For now, a very quick demonstration.  This creates a one-dimensional node list with number ranges between 1 and 3, 5, and 6 through 10.  
+
+@node_list =  (1..100).map { while (n = rand(10) + 1) == 4 or n == 6; end;  n} 
+@kmeans = KMeans::Agent.call(:k => 3, *@node_list)
+puts @kmeans.centroids.inspect
+# => [KMeans::Centroid:[223/26], KMeans::Centroid:[37/17], KMeans::Centroid:[5]]
+@kmeans.centroids.map {|c| c.position.first.to_f} 
+# => [8.57692307692308, 2.17647058823529, 5.0]
+
+I'll put a more interesting example together at another time.
+
+==Installation
+
+sudo gem install davidrichards-kmeans
+
+=== Dependencies
+
+* TeguGears
+
+==COPYRIGHT
+
+Copyright (c) 2009 David Richards. See LICENSE for details.
