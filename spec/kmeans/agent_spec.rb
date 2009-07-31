@@ -26,5 +26,11 @@ describe Agent do
     c1.position.should eql([2,2,2])
     c2.position.should eql([8,8,8])
   end
+  
+  it "should be able to set a maximum number of iterations" do
+    agent = Agent.process(:k => 2, :max => 1, *@node_list)
+    agent.num_iterations.should eql(1)
+    
+  end
     
 end

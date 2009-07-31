@@ -21,6 +21,12 @@ module KMeans #:nodoc:
     # The centroids used for the clustering
     attr_reader :centroids
     
+    # The maximum number of iterations allowed
+    attr_reader :max
+    
+    # The number of iterations used
+    attr_reader :num_iterations
+    
     # All the affectd nodes
     def nodes
       Node.nodes
@@ -44,6 +50,7 @@ module KMeans #:nodoc:
         @k = opts[:k]
         @centroids = opts.fetch(:centroids, false)
         @online = opts.fetch(:online, false)
+        @max = opts.fetch(:max, 10_000)
       else
         @k = opts
       end
@@ -67,9 +74,12 @@ module KMeans #:nodoc:
       def stabilize_centroids
         @centroids ||= infer_centroids(@k)
         n = Node.cluster_to(@centroids)
+        @num_iterations = 0
         while n > 0
           @centroids.each { |c| c.rebalance }
           n = Node.cluster_to(@centroids)
+          @num_iterations += 1
+          break if self.num_iterations >= self.max
         end
       end
       
